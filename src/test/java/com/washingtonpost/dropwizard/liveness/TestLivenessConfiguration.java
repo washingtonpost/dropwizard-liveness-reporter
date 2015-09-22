@@ -1,5 +1,7 @@
 package com.washingtonpost.dropwizard.liveness;
 
+import com.timgroup.statsd.NoOpStatsDClient;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,5 +35,11 @@ public class TestLivenessConfiguration {
         config.setStatsdHost("statsd");
         config.setLivenessMetric(null);
         assertNull(config.build());
+    }
+
+    @Test
+    public void buildingWithStatsDClientProvidedIsOkay() {
+        config.setLivenessMetric("whatever");
+        assertNotNull(config.build(new NoOpStatsDClient()));
     }
 }

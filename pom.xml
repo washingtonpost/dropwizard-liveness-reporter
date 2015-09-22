@@ -10,7 +10,7 @@
     
     <groupId>com.washingtonpost.dropwizard</groupId>
     <artifactId>dropwizard-liveness-reporter</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>dropwizard-liveness-reporter</name>
     <description>Simple thread w/ Dropwizard-style configuration factory to report liveness of a service</description>

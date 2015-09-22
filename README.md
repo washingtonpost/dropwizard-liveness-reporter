@@ -56,3 +56,14 @@ The liveness reporter is a thread, which you start in your Dropwizard Applicatio
         configuration.getLiveness().buildAndRun();
     }
 ```
+
+### Using a StatsDClient singleton
+If your dropwizard application already has need of a StatsDClient, the LivenessConfiguration supports an additional builder option where you can pass in a previously constructed/provided StatsDClient:
+```Java
+    @Override
+    public void run(MyConfiguration configuration, Environment environment) throws Exception {
+        StatsDClient statsdClient = // get from some other configuration/environment option
+        configuration.getLiveness().buildAndRun(statsdClient);
+    }
+```
+

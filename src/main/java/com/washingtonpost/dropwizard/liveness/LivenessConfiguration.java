@@ -2,6 +2,7 @@ package com.washingtonpost.dropwizard.liveness;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,7 +71,18 @@ public class LivenessConfiguration {
      * @return A new LivenessReporter that has had its thread started
      */
     public LivenessReporter buildAndRun() {
-        LivenessReporter reporter = build();
+        return runReporterThread(build());
+    }
+    
+    /**
+     * @param statsdClient The client to use to report liveness
+     * @return A new LivenessReporter using {@code statsdClient} that has had its thread started
+     */
+    public LivenessReporter buildAndRun(StatsDClient statsdClient) {
+        return runReporterThread(build(statsdClient));
+    }
+
+    private LivenessReporter runReporterThread(LivenessReporter reporter) {
         if (reporter != null) {
             Thread reporterThread = new Thread(reporter);
             reporterThread.start();
@@ -86,12 +98,36 @@ public class LivenessConfiguration {
             logger.info("StatsHost or StatsdPort is null, skipping construction of the LivenessReporter");
             return null;
         }
+        
+        logger.info("Constructing StatsDClient for '{}' on port '{}'", statsdHost, statsdPort);
+        StatsDClient statsdClient = new NonBlockingStatsDClient(statsdPrefix, statsdHost, statsdPort);
+        
+        return build(statsdClient, this.livenessMetric, this.livenessFrequencySec);
+    }
+
+
+    /**
+     * @param statsdClient The client to use to report liveness
+     * @return The LivenessReporter, using the parameter {@code statsdClient}
+     */
+    public LivenessReporter build(StatsDClient statsdClient) {
+        return build(statsdClient, this.livenessMetric, this.livenessFrequencySec);
+    }
+
+    /**
+     * @param statsdClient The client to use to report liveness
+     * @param livenessMetric The metric to be the heartbeat gauge we write to
+     * @param livenessFrequencySec How frequently we write a "1" to {@code livenessMetric}
+     * @return The LivenessReporter
+     */
+    public LivenessReporter build(StatsDClient statsdClient, String livenessMetric, int livenessFrequencySec) {
+        if (statsdClient == null) {
+            logger.info("Because build argument for statsdClient was null, returning null LivenessReporter");
+        }
         if (livenessMetric == null) {
             logger.info("livenessMetric, skipping construction of the LivenessReporter");
             return null;
         }
-        logger.info("Constructing StatsDClient for '{}' on port '{}'", statsdHost, statsdPort);
-        NonBlockingStatsDClient statsdClient = new NonBlockingStatsDClient(statsdPrefix, statsdHost, statsdPort);
-        return new LivenessReporter(statsdClient, this.livenessMetric, this.livenessFrequencySec);
+        return new LivenessReporter(statsdClient, livenessMetric, livenessFrequencySec);
     }
 }
