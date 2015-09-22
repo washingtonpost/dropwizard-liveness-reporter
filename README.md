@@ -51,7 +51,7 @@ liveness:
 ### Running the LivenessReporter
 The liveness reporter is a thread, which you start in your Dropwizard Application's run() method:
 ```Java
-@Override
+    @Override
     public void run(MyConfiguration configuration, Environment environment) throws Exception {
         configuration.getLiveness().buildAndRun();
     }
