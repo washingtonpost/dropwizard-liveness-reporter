@@ -6,7 +6,7 @@ Dropwizard already has great Metrics support and provides out-of-the-box endpoin
 
 At The Washington Post, we run Dropwizard micro-services in Docker containers.  Each docker container is deployed to a server on which we can count on there being a Datadog Agent available at the UDP port "statsd:8125".  Metrics streams to that datadog agent are forwarded to our Datadog account where we can setup alerts to notify us over Slack or Email that the heartbeat that the LivenessReporter in this artifact hasn't been heard from in a while.  This screen shot demonstrates an example Monitor that looks for the absence of a heartbeat: 
 
-[./docs/datadog-alert.png]
+![Screen shot of datadog alert configuration](./docs/datadog-alert.png)
 
 ## Using this Artifact
 
