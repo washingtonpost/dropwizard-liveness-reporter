@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>com.washingtonpost</groupId>
+        <artifactId>wp-oss-parent-pom</artifactId>
+        <version>0.0.8</version>
+    </parent>
+    
+    <groupId>com.washingtonpost.dropwizard</groupId>
+    <artifactId>dropwizard-liveness-reporter</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>dropwizard-liveness-reporter</name>
+    <description>Simple thread w/ Dropwizard-style configuration factory to report liveness of a service</description>
+    
+    <scm>
+        <connection>scm:git:git@github.com:washingtonpost/dropwizard-liveness-reporter.git</connection>
+        <developerConnection>scm:git:git@github.com:washingtonpost/dropwizard-liveness-reporter.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>http://github.com:washingtonpost/dropwizard-liveness-reporter</url>
+    </scm>
+    
+    <properties>
+        <version.dogstatsd.client>2.0.7</version.dogstatsd.client>
+        <version.easymock>3.3.1</version.easymock>
+        <version.jackson>2.5.1</version.jackson>
+        <version.junit>4.12</version.junit>
+        <version.slf4j>1.7.10</version.slf4j>
+    </properties>
+    
+    <dependencies>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.indeed</groupId>
+            <artifactId>java-dogstatsd-client</artifactId>
+            <version>${version.dogstatsd.client}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+        
+        <!-- TEST Scoped Dependencies -->
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${version.easymock}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- So our tests actually log to files -->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${version.slf4j}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
