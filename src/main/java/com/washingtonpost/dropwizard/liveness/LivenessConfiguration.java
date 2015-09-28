@@ -123,11 +123,13 @@ public class LivenessConfiguration {
     public LivenessReporter build(StatsDClient statsdClient, String livenessMetric, int livenessFrequencySec) {
         if (statsdClient == null) {
             logger.info("Because build argument for statsdClient was null, returning null LivenessReporter");
+            return null;
         }
         if (livenessMetric == null) {
             logger.info("livenessMetric, skipping construction of the LivenessReporter");
             return null;
         }
+        logger.debug("Building LivenessReporter for livenessMetric {} every {} seconds", livenessMetric, livenessFrequencySec);
         return new LivenessReporter(statsdClient, livenessMetric, livenessFrequencySec);
     }
 }
