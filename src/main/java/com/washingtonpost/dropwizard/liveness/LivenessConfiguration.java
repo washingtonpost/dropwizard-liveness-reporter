@@ -84,8 +84,12 @@ public class LivenessConfiguration {
 
     private LivenessReporter runReporterThread(LivenessReporter reporter) {
         if (reporter != null) {
+            logger.debug("Reporter is not null, so starting/running ReporterThread");
             Thread reporterThread = new Thread(reporter);
             reporterThread.start();
+        }
+        else {
+            logger.debug("LivenessReporter is null, so not starting any liveness reporting thread");
         }
         return reporter;
     }
