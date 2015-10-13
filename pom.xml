@@ -10,7 +10,7 @@
     
     <groupId>com.washingtonpost.dropwizard</groupId>
     <artifactId>dropwizard-liveness-reporter</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <name>dropwizard-liveness-reporter</name>
     <description>Simple thread w/ Dropwizard-style configuration factory to report liveness of a service</description>
@@ -18,7 +18,7 @@
     <scm>
         <connection>scm:git:git@github.com:washingtonpost/dropwizard-liveness-reporter.git</connection>
         <developerConnection>scm:git:git@github.com:washingtonpost/dropwizard-liveness-reporter.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>1.1.0</tag>
         <url>http://github.com:washingtonpost/dropwizard-liveness-reporter</url>
     </scm>
     
