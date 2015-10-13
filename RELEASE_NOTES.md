@@ -1,6 +1,6 @@
 # Dropwizard-Liveness-Reporter Release Notes
 
-## 1.1.0 2015/09/22
+## 1.1.0 2015/10/13
 
 * Added additional constructors/builders to facilitate re-using a StatsDClient
 
