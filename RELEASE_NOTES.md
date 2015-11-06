@@ -1,4 +1,7 @@
-# Dropwizard-Liveness-Reporter Release Notes
+## 2.0.0 2015/11/06
+
+* Upgrading to library versions compatible with dropwizard-0.9.1
+  (specifically, Jackson 2.5.1 -> 2.6.2 and slf4j 1.7.10 -> 1.7.12)
 
 ## 1.1.0 2015/10/13
 
