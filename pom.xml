@@ -23,7 +23,7 @@
     </scm>
     
     <properties>
-        <version.statsd.client>3.0.1</version.statsd.client>
+        <version.statsd.client>3.1.0</version.statsd.client>
         <version.easymock>3.3.1</version.easymock>
         <version.jackson>2.6.2</version.jackson>
         <version.junit>4.12</version.junit>
