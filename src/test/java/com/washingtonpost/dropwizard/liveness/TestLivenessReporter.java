@@ -12,9 +12,9 @@ public class TestLivenessReporter {
     @Test
     public void testRun() throws InterruptedException {
         StatsDClient mockStatsdClient = createNiceMock(StatsDClient.class);
-        mockStatsdClient.gauge("foo", 1, (String[]) null);
-        mockStatsdClient.gauge("foo", 1, (String[]) null);
-        mockStatsdClient.gauge("foo", 1, (String[]) null);
+        mockStatsdClient.gauge("foo", 1);
+        mockStatsdClient.gauge("foo", 1);
+        mockStatsdClient.gauge("foo", 1);
         replay(mockStatsdClient);
 
         LivenessReporter reporter = new LivenessReporter(mockStatsdClient, "foo", 1);

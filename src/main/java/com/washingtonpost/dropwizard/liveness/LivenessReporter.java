@@ -25,7 +25,7 @@ public class LivenessReporter implements Runnable {
     public void run() {
         while (!stop) {
             logger.trace("Squawking a 1 against livenessMetric gauge {}", livenessMetric);
-            this.statsdClient.gauge(livenessMetric, 1, (String[]) null);
+            this.statsdClient.gauge(livenessMetric, 1);
             try {
                 Thread.sleep(livenessFrequencySec * 1000);
             }

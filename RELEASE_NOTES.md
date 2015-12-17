@@ -1,7 +1,8 @@
-## 2.0.0 2015/11/06
+# Dropwizard-Liveness-Reporter Release Notes
 
-* Upgrading to library versions compatible with dropwizard-0.9.1
-  (specifically, Jackson 2.5.1 -> 2.6.2 and slf4j 1.7.10 -> 1.7.12)
+## 2.0.0 Release Date TBD
+
+* Changing from com.indeed:java-dogstatd-client:2.0.7 to com.timgroup:java-statsd-client:3.0.1
 
 ## 1.1.0 2015/10/13
 
