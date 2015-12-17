@@ -1,8 +1,8 @@
 # Dropwizard-Liveness-Reporter Release Notes
 
-## 2.0.0 Release Date TBD
+## 1.2.0 2015/12/17
 
-* Changing from com.indeed:java-dogstatd-client:2.0.7 to com.timgroup:java-statsd-client:3.1.0
+* Upgrading from com.indeed:java-dogstatd-client:2.0.7 to 2.0.9
 
 ## 1.1.0 2015/10/13
 

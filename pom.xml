@@ -10,7 +10,7 @@
     
     <groupId>com.washingtonpost.dropwizard</groupId>
     <artifactId>dropwizard-liveness-reporter</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>dropwizard-liveness-reporter</name>
     <description>Simple thread w/ Dropwizard-style configuration factory to report liveness of a service</description>
@@ -23,7 +23,7 @@
     </scm>
     
     <properties>
-        <version.statsd.client>3.1.0</version.statsd.client>
+        <version.dogstatsd.client>2.0.9</version.dogstatsd.client>
         <version.easymock>3.3.1</version.easymock>
         <version.jackson>2.6.2</version.jackson>
         <version.junit>4.12</version.junit>
@@ -38,9 +38,9 @@
             <version>${version.jackson}</version>
         </dependency>
         <dependency>
-            <groupId>com.timgroup</groupId>
-            <artifactId>java-statsd-client</artifactId>
-            <version>${version.statsd.client}</version>
+            <groupId>com.indeed</groupId>
+            <artifactId>java-dogstatsd-client</artifactId>
+            <version>${version.dogstatsd.client}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
