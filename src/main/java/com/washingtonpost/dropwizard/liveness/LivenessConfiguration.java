@@ -5,6 +5,7 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.List;
 
 /**
  * <p>Dropwizard-style configuration class for our Liveness Squawker</p>
@@ -23,6 +24,9 @@ public class LivenessConfiguration {
     private String livenessMetric;
     @JsonProperty
     private int livenessFrequencySec = 30;
+    @JsonProperty
+    private String[] tags;
+
 
     public String getStatsdHost() {
         return statsdHost;
@@ -67,13 +71,25 @@ public class LivenessConfiguration {
         this.livenessFrequencySec = livenessFrequencySec;
     }
 
+    public void setTags(List<String> tags) {
+        this.tags = tags.toArray(new String[0]);
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
     /**
      * @return A new LivenessReporter that has had its thread started
      */
     public LivenessReporter buildAndRun() {
         return runReporterThread(build());
     }
-    
+
     /**
      * @param statsdClient The client to use to report liveness
      * @return A new LivenessReporter using {@code statsdClient} that has had its thread started
@@ -102,10 +118,10 @@ public class LivenessConfiguration {
             logger.info("StatsHost or StatsdPort is null, skipping construction of the LivenessReporter");
             return null;
         }
-        
+
         logger.info("Constructing StatsDClient for '{}' on port '{}'", statsdHost, statsdPort);
-        StatsDClient statsdClient = new NonBlockingStatsDClient(statsdPrefix, statsdHost, statsdPort);
-        
+        StatsDClient statsdClient = new NonBlockingStatsDClient(statsdPrefix, statsdHost, statsdPort, 10000, tags);
+
         return build(statsdClient, this.livenessMetric, this.livenessFrequencySec);
     }
 
