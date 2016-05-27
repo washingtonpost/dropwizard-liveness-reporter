@@ -1,10 +1,10 @@
 # dropwizard-liveness-reporter
-Simple thread to squawk a "1" against a Statsd gauge to act as a sentinel for uptime monitors/alerts 
+Simple thread to squawk a "1" against a Statsd gauge to act as a sentinel for uptime monitors/alerts
 
 ## Use case
 Dropwizard already has great Metrics support and provides out-of-the-box endpoints for testing the status and health of a Dropwizard service.  This small artifact is designed to support a pro-active "ping out" approach (e.g. "I'm still alive") as opposed to a reactive "ping in" approach (e.g. "Are you still alive")?
 
-At The Washington Post, we run Dropwizard micro-services in Docker containers.  Each docker container is deployed to a server on which we can count on there being a Datadog Agent available at the UDP port "statsd:8125".  Metrics streams to that datadog agent are forwarded to our Datadog account where we can setup alerts to notify us over Slack or Email that the heartbeat that the LivenessReporter in this artifact hasn't been heard from in a while.  This screen shot demonstrates an example Monitor that looks for the absence of a heartbeat: 
+At The Washington Post, we run Dropwizard micro-services in Docker containers.  Each docker container is deployed to a server on which we can count on there being a Datadog Agent available at the UDP port "statsd:8125".  Metrics streams to that datadog agent are forwarded to our Datadog account where we can setup alerts to notify us over Slack or Email that the heartbeat that the LivenessReporter in this artifact hasn't been heard from in a while.  This screen shot demonstrates an example Monitor that looks for the absence of a heartbeat:
 
 ![Screen shot of datadog alert configuration](./docs/datadog-alert.png)
 
@@ -16,7 +16,7 @@ In a Maven pom.xml, add:
         <dependency>
             <groupId>com.washingtonpost.dropwizard</groupId>
             <artifactId>dropwizard-liveness-reporter</artifactId>
-            <version>1.0.0</version>  <!-- check RELEASE_NOTES.md for best version for you -->
+            <version>1.4.0</version>  <!-- check RELEASE_NOTES.md for best version for you -->
         </dependency>
 ```
 
@@ -43,9 +43,10 @@ In you application's configuration YAML, add:
 liveness:
     statsdHost: statsd              // required, server host name of your Datadog agent
     statsdPort: 8125                // defaults to 8125
-    statsdPrefix: my.app.on.prod    // required, pick something that differentiates apps 
+    statsdPrefix: my.app.on.prod    // required, pick something that differentiates apps
     livenessMetric: server.alive    // required, this is the metric to Monitor
     livenessFrequencySec: 30        // defaults to 30
+    tags: env:prod                  // for datadog categorization
 ```
 
 ### Running the LivenessReporter
@@ -66,4 +67,3 @@ If your dropwizard application already has need of a StatsDClient, the LivenessC
         configuration.getLiveness().buildAndRun(statsdClient);
     }
 ```
-
