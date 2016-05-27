@@ -31,13 +31,14 @@ public class IntTestLivenessReporter {
         config.setStatsdPrefix("foo");
         config.setLivenessMetric("alive");
         config.setLivenessFrequencySec(1);
+        config.setTags(new String[] {"env:prod", "foo:bar"});
 
         LivenessReporter reporter = null;
         try {
             reporter = config.buildAndRun();
             server.waitForMessage();
             Thread.sleep(3000);
-            assertTrue("Expected message received to be 'foo.alive:1|g'", server.messagesReceived().contains("foo.alive:1|g"));
+            assertTrue("Expected message received to be 'foo.alive:1|g|#foo:bar,env:prod'", server.messagesReceived().contains("foo.alive:1|g|#foo:bar,env:prod"));
         } catch (InterruptedException ex) {
             logger.error("Exception waiting in test", ex);
         } finally {

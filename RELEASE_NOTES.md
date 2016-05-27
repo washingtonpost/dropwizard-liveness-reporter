@@ -1,5 +1,10 @@
 # Dropwizard-Liveness-Reporter Release Notes
 
+## 1.4.0 2016/05/27
+
+* Upgrading from com.indeed:java-dogstatd-client:2.0.9 to 2.0.16
+* Added support for datadog tags
+
 ## 1.3.0 2015/12/17
 
 * Upgrading from com.indeed:java-dogstatd-client:2.0.7 to 2.0.9
