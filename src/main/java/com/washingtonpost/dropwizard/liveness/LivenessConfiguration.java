@@ -71,10 +71,6 @@ public class LivenessConfiguration {
         this.livenessFrequencySec = livenessFrequencySec;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags.toArray(new String[0]);
-    }
-
     public void setTags(String[] tags) {
         this.tags = tags;
     }
